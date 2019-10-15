@@ -1,0 +1,73 @@
+@model Product
+
+
+
+<p class="h2 mb-5">
+    <span >
+        <a href="success"> Dashboard</a>
+    </span>
+    <span  >
+       <a  class="ml-2">Products</a> 
+    </span>
+    <span  class="ml-2">
+       <a href="newOrder" class="ml-2">Orders</a> 
+    </span>
+    <span >
+       <a  href="newCustomer" class="ml-2">Customers</a> 
+    </span>
+    <span >
+       <a href="#" class="ml-2">Settings</a> 
+    </span>
+    <span class="float-right">
+        <a href="logout" class="h4 ml-5">Logout</a>
+    </span>
+</p>
+
+<div class="row">
+    <div class="col-3">
+        <p class="h5">Add a new Product</p>
+        <form action="addProduct" method="post">
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <div>
+                Name: <br>
+                <input type="text" asp-for="Name" >
+            </div>
+
+            <div>
+                Image (url): 
+                <input type="text" asp-for="ImgUrl" >
+            </div>
+
+            <div>
+                Description: 
+                <input type="text" asp-for="Description" >
+            </div>
+
+            <span asp-validation-for="Inventory" class="text-danger"></span>
+            <div>
+                Initial Quantity: 
+                <input type="number" asp-for="Inventory" >
+            </div>
+            
+            <input type="submit" value="Create" class="btn btn-success mt-2">
+        </form>
+    </div>
+    <div class="col">
+        @foreach(Product one in ViewBag.allProducts)
+        {
+        <div class="d-inline-block pre-scrollable">
+            <div class="card" style="width: 12rem;">
+            <img src="@one.ImgUrl" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@one.Name</h5>
+                <p class="card-text">(@one.Inventory left)</p>
+            </div>
+            </div>
+
+        </div>
+        }
+
+    </div>
+
+</div>
+
